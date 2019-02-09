@@ -1,0 +1,22 @@
+---
+# tasks file for common
+- name: Update apt-cache and install basic packages
+  apt: 
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - aptitude
+    - apt-transport-https
+    - ca-certificates 
+    - curl
+    - gnupg-agent
+    - software-properties-common
+    - git
+
+- name: Upgrade all packages to the latest version
+  apt:
+    name: "*"
+    state: latest
+
+- include: monitoring.yml
+- include: security.yml

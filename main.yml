@@ -1,0 +1,14 @@
+---
+
+- hosts: all         
+  remote_user: "root"
+  become: yes
+  become_method: sudo
+  serial: 1
+  gather_facts: False
+  pre_tasks:
+  - raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
+  - setup: # aka gather_facts
+  roles:
+  - role: common   
+  - role: docker
