@@ -88,11 +88,11 @@ output:
 {% endif %}
 {% endif %}
 
-{% if filebeat_output_logstash_enabled %}
+{% if beat_output_logstash_enabled %}
   ### Logstash as output
   logstash:
     # The Logstash hosts
-    hosts: {{ filebeat_output_logstash_hosts | to_json }}
+    hosts: {{ beat_output_logstash_hosts | to_json }}
 
     # Number of workers per Logstash host.
     #worker: 1

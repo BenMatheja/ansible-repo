@@ -2,11 +2,11 @@
 metricbeat.modules:
    {{ metricbeat_modules | to_json }}
 
-{% if metricbeat_output_logstash_enabled %}
+{% if beat_output_logstash_enabled %}
 #----------------------------- Logstash output --------------------------------
 output.logstash:
   # The Logstash hosts
-  hosts: {{ metricbeat_output_logstash_hosts | to_json }}
+  hosts: {{ beat_output_logstash_hosts | to_json }}
 
 {% if filebeat_ssl_certificate_file and filebeat_ssl_key_file %}
   # Optional TLS. By default is off.
