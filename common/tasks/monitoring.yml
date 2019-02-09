@@ -22,6 +22,7 @@
 - name: Install Metricbeat.
   package: name=metricbeat state=present
 
+## Copy Beat configuration ##
 - name: Copy Filebeat configuration.
   template:
     src: filebeat.yml.j2
@@ -31,6 +32,16 @@
     mode: 0644
   notify: restart filebeat
 
+- name: Copy Metricbeat configuration.
+  template:
+    src: metricbeat.yml.j2
+    dest: "/etc/metricbeat/metricbeat.yml"
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart metricbeat
+
+## Provisioning of SSL Keys
 - name: Ensure Filebeat SSL key pair directory exists.
   file:
     path: "{{ filebeat_ssl_dir }}"
@@ -48,6 +59,7 @@
   notify: restart filebeat
   when: filebeat_ssl_key_file and filebeat_ssl_certificate_file
 
+# Systemctl enable
 - name: Ensure Filebeat is started and enabled at boot.
   service:
     name: filebeat
@@ -56,6 +68,6 @@
 
 - name: Ensure Metricbeat is started and enabled at boot.
   service:
-    name: filebeat
+    name: metricbeat
     state: started
     enabled: true
