@@ -18,5 +18,11 @@
     name: "*"
     state: latest
 
+#https://stackoverflow.com/questions/35991247/apt-repository-module-fails-ansible
+- name: Run command for cleanup
+  command: apt-get -y clean && apt-get -y autoclean
+  become: yes
+
 - include: monitoring.yml
 - include: security.yml
+

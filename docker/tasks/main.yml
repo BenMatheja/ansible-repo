@@ -15,6 +15,11 @@
       - ca-certificates
     state: present
 
+#https://stackoverflow.com/questions/35991247/apt-repository-module-fails-ansible
+- name: Run command for cleanup
+  command: apt-get -y clean && apt-get -y autoclean
+  become: yes
+
 - name: Add Docker apt key.
   apt_key:
     url: https://download.docker.com/linux/ubuntu/gpg
