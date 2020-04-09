@@ -2,9 +2,3 @@
 # handlers file for common
 - name: restart sshd
   service: name={{ sshd }} state=restarted
-  
-- name: restart filebeat
-  service: name=filebeat state=restarted
-
-- name: restart metricbeat
-  service: name=metricbeat state=restarted
